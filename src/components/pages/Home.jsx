@@ -1,5 +1,5 @@
 import React from 'react';
-import { Categories, SortPopup } from '../components';
+import { Categories, SortPopup } from '../../components';
 
 function Home() {
   return (
