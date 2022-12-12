@@ -4,11 +4,17 @@ export const setLoaded = (playload) => ({
   playload,
 });
 
-export const fetchPizzas = () => (dispatch) => {
+export const fetchPizzas = (category, sortBy) => (dispatch) => {
   dispatch(setLoaded(false));
-  axios.get('http://localhost:3004/pizzas').then(({ data }) => {
-    dispatch(setPizzas(data));
-  });
+  axios
+    .get(
+      `http://localhost:3004/pizzas?${
+        category !== null ? `category=${category}` : ''
+      }&_sort=${sortBy}&_order=${sortBy === 'name' ? 'asc' : 'desc'}`,
+    )
+    .then(({ data }) => {
+      dispatch(setPizzas(data));
+    });
 };
 
 export const setPizzas = (items) => ({
