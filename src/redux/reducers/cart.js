@@ -18,13 +18,19 @@ const cart = (state = initialState, action) => {
         totalCount: action.payload,
       };
 
-    case 'ADD_PIZZA_CART':
+    case 'ADD_PIZZA_CART': {
+      const newItems = {
+        ...state.items,
+        [action.payload.id]: !state.items[action.payload.id]
+          ? [action.payload]
+          : [...state.items[action.payload.id], action.payload],
+      };
       return {
         ...state,
-        items: {
-          [action.payload.id]: [...state.items[action.payload.id], action.payload],
-        },
+        items: newItems,
+        totalCount: [].concat.apply([], Object.values(newItems)).length,
       };
+    }
     default:
       return state;
   }
