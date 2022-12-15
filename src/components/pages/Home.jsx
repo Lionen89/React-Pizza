@@ -16,6 +16,9 @@ function Home() {
   const dispatch = useDispatch();
 
   const items = useSelector(({ pizzas }) => pizzas.items);
+  const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
+  const { category, sortBy } = useSelector(({ filters }) => filters);
+  const cartItems = useSelector(({ cart }) => cart.items);
 
   const onSelectCategory = React.useCallback((index) => {
     dispatch(setCategiry(index));
@@ -31,9 +34,6 @@ function Home() {
       payload: obj,
     });
   };
-
-  const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
-  const { category, sortBy } = useSelector(({ filters }) => filters);
 
   React.useEffect(() => {
     dispatch(fetchPizzas(category, sortBy));
@@ -52,7 +52,14 @@ function Home() {
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
         {isLoaded
-          ? items.map((obj) => <PizzaBlock onAddPizza={addPizzaToCart} {...obj} key={obj.id} />)
+          ? items.map((obj) => (
+              <PizzaBlock
+                onAddPizza={addPizzaToCart}
+                {...obj}
+                key={obj.id}
+                addedCount={cartItems[obj.id] && cartItems[obj.id].length}
+              />
+            ))
           : Array(12)
               .fill(0)
               .map((_, index) => <PizzaLoadingBlock key={index} />)}
