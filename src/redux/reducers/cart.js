@@ -40,6 +40,23 @@ const cart = (state = initialState, action) => {
         totalPrice,
       };
     }
+    case 'CLEAR_CART': {
+      return {
+        items: {},
+        totalPrice: 0,
+        totalCount: 0,
+      };
+    }
+    case 'REMOVE_CART_ITEM': {
+      const newItems = structuredClone(state.items);
+      const currentTotalPrice = newItems[action.payload].totalPrice;
+      delete newItems[action.payload];
+      return {
+        ...state,
+        items: newItems,
+        totalPrice: state.totalPrice - currentTotalPrice,
+      };
+    }
     default:
       return state;
   }
