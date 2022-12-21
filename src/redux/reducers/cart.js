@@ -4,6 +4,10 @@ const initialState = {
   totalCount: 0,
 };
 const getTotalPrice = (arr) => arr.reduce((sum, obj) => obj.price + sum, 0);
+const getAllPizzas = (object) => {
+  const items = Object.values(object).map((obj) => obj.items);
+  return [].concat.apply([], items);
+};
 
 const cart = (state = initialState, action) => {
   switch (action.type) {
@@ -30,13 +34,11 @@ const cart = (state = initialState, action) => {
           totalPrice: getTotalPrice(currentPizzaItems),
         },
       };
-      const items = Object.values(newItems).map((obj) => obj.items);
-      const allPizzas = [].concat.apply([], items);
-      const totalPrice = getTotalPrice(allPizzas);
+      const totalPrice = getTotalPrice(getAllPizzas(newItems));
       return {
         ...state,
         items: newItems,
-        totalCount: allPizzas.length,
+        totalCount: getAllPizzas(newItems).length,
         totalPrice,
       };
     }
@@ -50,11 +52,55 @@ const cart = (state = initialState, action) => {
     case 'REMOVE_CART_ITEM': {
       const newItems = structuredClone(state.items);
       const currentTotalPrice = newItems[action.payload].totalPrice;
+      const currentTotalCount = newItems[action.payload].items.length;
       delete newItems[action.payload];
       return {
         ...state,
         items: newItems,
         totalPrice: state.totalPrice - currentTotalPrice,
+        totalCount: state.totalCount - currentTotalCount,
+      };
+    }
+    case 'PLUS_CART_ITEM': {
+      const newObjItems = [
+        ...state.items[action.payload].items,
+        state.items[action.payload].items[0],
+      ];
+      const newItems = {
+        ...state.items,
+        [action.payload]: {
+          items: newObjItems,
+          totalPrice: getTotalPrice(newObjItems),
+        },
+      };
+
+      const totalPrice = getTotalPrice(getAllPizzas(newItems));
+      return {
+        ...state,
+        items: newItems,
+        totalPrice,
+        totalCount: getAllPizzas(newItems).length,
+      };
+    }
+    case 'MINUS_CART_ITEM': {
+      const oldItems = state.items[action.payload].items;
+      const newObjItems =
+        oldItems.length > 1 ? state.items[action.payload].items.slice(1) : oldItems;
+      const newItems = {
+        ...state.items,
+        [action.payload]: {
+          items: newObjItems,
+          totalPrice: getTotalPrice(newObjItems),
+        },
+      };
+
+      const totalPrice = getTotalPrice(getAllPizzas(newItems));
+
+      return {
+        ...state,
+        items: newItems,
+        totalCount: getAllPizzas(newItems).length,
+        totalPrice,
       };
     }
     default:

@@ -1,8 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Button from './Button';
 
-function CartItem({ id, name, type, size, totalPrice, totalCount, onRemoveItem }) {
+function CartItem({
+  id,
+  name,
+  type,
+  size,
+  totalPrice,
+  totalCount,
+  onRemoveItem,
+  onPlusItem,
+  onMinusItem,
+}) {
   return (
     <div className="cart__item">
       <div className="cart__item-img">
@@ -19,7 +28,9 @@ function CartItem({ id, name, type, size, totalPrice, totalCount, onRemoveItem }
         </p>
       </div>
       <div className="cart__item-count">
-        <div className="button button--outline button--circle cart__item-count-minus">
+        <div
+          className="button button--outline button--circle cart__item-count-minus"
+          onClick={() => onMinusItem(id)}>
           <svg
             width="10"
             height="10"
@@ -37,7 +48,9 @@ function CartItem({ id, name, type, size, totalPrice, totalCount, onRemoveItem }
           </svg>
         </div>
         <b>{totalCount}</b>
-        <div className="button button--outline button--circle cart__item-count-plus">
+        <div
+          className="button button--outline button--circle cart__item-count-plus"
+          onClick={() => onPlusItem(id)}>
           <svg
             width="10"
             height="10"
