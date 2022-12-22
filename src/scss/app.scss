@@ -33,6 +33,8 @@ body {
   &__top {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    row-gap: 20px;
     justify-content: space-between;
   }
 }
@@ -55,6 +57,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    row-gap: 20px;
   }
 
   .content__title {
@@ -215,6 +219,8 @@ body {
     &-details {
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
+      row-gap: 20px;
 
       span {
         font-size: 22px;
@@ -230,6 +236,8 @@ body {
     &-buttons {
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
+      row-gap: 20px;
       margin-top: 40px;
 
       .go-back-btn {
@@ -275,7 +283,7 @@ body {
 
   &--empty {
     margin: 0 auto;
-    width: 560px;
+    max-width: 560px;
     text-align: center;
 
     h2 {
@@ -297,7 +305,7 @@ body {
 
     img {
       display: block;
-      width: 300px;
+      max-width: 80%;
       margin: 45px auto 60px;
     }
 
