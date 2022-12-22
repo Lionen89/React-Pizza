@@ -32,3 +32,12 @@
     }
   }
 }
+@media screen and (max-width: 637px) {
+  .header {
+    .container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

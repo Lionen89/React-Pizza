@@ -145,4 +145,12 @@
       font-size: 16px;
     }
   }
+  @media screen and (max-width: 637px) {
+    .button {
+      &--circle {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
 }

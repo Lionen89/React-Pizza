@@ -14,7 +14,7 @@ function CartItem({
 }) {
   return (
     <div className="cart__item">
-      <div>
+      <div className="cart__item-container">
         <div className="cart__item-img">
           <img
             className="pizza-block__image"
@@ -29,7 +29,7 @@ function CartItem({
           </p>
         </div>
       </div>
-      <div>
+      <div className="cart__item-container">
         <div className="cart__item-count">
           <div
             className="button button--outline button--circle cart__item-count-minus"

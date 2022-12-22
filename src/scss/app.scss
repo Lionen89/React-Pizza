@@ -121,11 +121,20 @@ body {
       display: flex;
       align-items: center;
       margin-right: 15px;
-      width: 10%;
+      width: auto;
 
       img {
         width: 80px;
         height: 80px;
+      }
+    }
+    &-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      &:first-child {
+        justify-content: start;
       }
     }
 
@@ -152,7 +161,7 @@ body {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 13%;
+      min-width: 30%;
 
       &-minus {
         svg {
@@ -315,6 +324,66 @@ body {
       margin: 0 auto;
       font-weight: 600;
       font-size: 18px;
+    }
+  }
+  @media screen and (max-width: 637px) {
+    .cart {
+      &__item {
+        flex-direction: column;
+        row-gap: 30px;
+        &-container {
+          justify-content: space-around;
+        }
+        &-info {
+          & h3 {
+            font-size: 16px;
+            line-height: 18px;
+          }
+          & p {
+            font-size: 12px;
+          }
+        }
+        &-count {
+          &-minus {
+            min-width: 20px;
+            width: 20px;
+            height: 20px;
+          }
+          &-plus {
+            min-width: 20px;
+            width: 20px;
+            height: 20px;
+          }
+          & b {
+            font-size: 16px;
+          }
+        }
+        &-price {
+          & b {
+            font-size: 16px;
+          }
+        }
+      }
+      &__top {
+        flex-direction: column;
+        justify-content: center;
+      }
+      &__bottom {
+        &-details {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          & span {
+            font-size: 16px;
+          }
+        }
+        &-buttons {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+      }
     }
   }
 }
